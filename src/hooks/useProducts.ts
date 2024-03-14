@@ -42,11 +42,11 @@ export const useProducts = () => {
     }
   };
 
-  const editProduct = async (data: ProductProps) => {
+  const editProduct = async (id: string, data: ProductProps) => {
     setLoading(true);
 
     try {
-      await api.put("/products", { ...data });
+      await api.put("/products", { ...data }, { headers: { product_id: id } });
 
       const products = await api.get<GetAllProductsResponseDTO>("/products");
 
@@ -65,9 +65,7 @@ export const useProducts = () => {
 
     try {
       const result = await api.delete<{ message: string }>("/products", {
-        headers: {
-          product_id: id,
-        },
+        headers: { product_id: id },
       });
 
       const products = await api.get<GetAllProductsResponseDTO>("/products");

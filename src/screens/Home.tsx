@@ -1,14 +1,19 @@
-import React, { useEffect } from 'react';
-import { CiEdit } from "react-icons/ci";
+import React, { useEffect, useState } from 'react';
 
 import { useProducts } from '../hooks/useProducts';
 
 import PageContainer from '../components/PageContainer';
 import LoadingComponent from '../components/LoadingComponent';
+import ModalEditProduct from '../components/ModalEditProduct';
+import { ProductsDTO } from '../dtos/ProductsDTO';
 
 
 const Home: React.FC = () => {
   const { loading, products, getAllProducts, deleteProduct } = useProducts()
+
+
+  const [selectedProduct, setSelectedProduct] = useState<ProductsDTO>({} as ProductsDTO)
+  const [visibleModalEditProduct, setVisibleModalEditProduct] = useState<boolean>(false)
 
 
   useEffect(() => {
@@ -49,7 +54,12 @@ const Home: React.FC = () => {
               </div>
 
               <div className='w-[100%] grid grid-cols-2 gap-2 p-2  ' >
-                <button className="w-[100%] h-[38px] bg-blue-700 rounded-lg text-white hover:bg-blue-500 ease-in-out duration-100 " >
+                <button
+                  onClick={() => {
+                    setSelectedProduct(item)
+                    setVisibleModalEditProduct(true)
+                  }}
+                  className="w-[100%] h-[38px] bg-blue-700 rounded-lg text-white hover:bg-blue-500 ease-in-out duration-100 " >
                   Editar
                 </button>
 
@@ -68,13 +78,24 @@ const Home: React.FC = () => {
   }
 
   return (
-    <PageContainer>
-      <h1>Listagem de Produtos</h1>
-      <div className='w-[100%] h-[0.5px] bg-gray-300 mt-2 mb-5  ' />
+    <>
+      <PageContainer>
+        <h1>Listagem de Produtos</h1>
+        <div className='w-[100%] h-[0.5px] bg-gray-300 mt-2 mb-5  ' />
 
-      {renderProducts()}
+        {renderProducts()}
 
-    </PageContainer>
+
+      </PageContainer>
+      {
+        visibleModalEditProduct && (
+          <ModalEditProduct
+            {...selectedProduct}
+            onClose={() => setVisibleModalEditProduct(false)}
+          />
+        )
+      }
+    </>
   )
 }
 

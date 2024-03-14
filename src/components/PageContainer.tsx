@@ -26,7 +26,7 @@ const PageContainer: React.FC<Props> = ({ children }) => {
             </summary>
 
             <div className="w-[250px] flex flex-col items-start gap-2 pl-4 pt-4 text-xl font-semibold " >
-              <a target="_self" href="/product/create" className="w-[100%] flex items-start text-[14px] hover:text-primary-color ease-in-out duration-100 focus:outline-none " >
+              <a target="_self" href="/" className="w-[100%] flex items-start text-[14px] hover:text-primary-color ease-in-out duration-100 focus:outline-none " >
                 Listagem de Produtos
               </a>
 
