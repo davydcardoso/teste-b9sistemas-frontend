@@ -5,10 +5,10 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from 'yup'
 
-import { ProductSchema } from "../screens/ProductRegistration";
-import Input from "./Input";
 import { useProducts } from "../hooks/useProducts";
-import LoadingComponent from "./LoadingComponent";
+import { ProductSchema } from "../screens/ProductRegistration";
+
+import Input from "./Input";
 
 type ProductProps = yup.InferType<typeof ProductSchema>
 
